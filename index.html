@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Ajax - jQuery - Json</title>
+<link rel="stylesheet" type="text/css" href="css/style.css">
+
+</head>
+<body>
+
+<nav>
+	<ul>
+		<li><a href="#" data-page="home">Home</a></li>
+		<li><a href="#" data-page="tutorial">Tutorial</a></li>
+		<li><a href="#" data-page="contact">Contact</a></li>
+	</ul>
+</nav>
+
+<!-- <a href="#" id="load">click to load text</a> -->
+<div id="content" class="test-box"></div>
+
+<section id="main">
+	
+
+
+</section>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script>
+
+//$(document).ready(function(){
+
+	var app = {
+		nav: $('nav ul li a'),
+		content: $("section#main")
+	};
+
+	//console.log(app);
+	app.putContent = function(content) {
+		this.content.html(content)
+
+	}
+
+	app.loadPage = function(page) {
+		$.ajax({
+			url: "page.php",
+			data: {page: page},
+			cache: true,
+			type: "get",
+			success: function(data){
+				console.log(data)
+				app.putContent(data)
+			},
+			error: function(){
+				app.putContent('error');
+			}
+		});
+		//console.log(page)
+	};
+
+	app.init = function() {
+		app.loadPage('home')
+		app.nav.click( function(){
+			var page = $(this).data('page');
+			app.loadPage(page);
+			//console.log(page);
+
+			/*if (page == "home") {
+				console.log('this is home page')
+			}*/
+			//console.log('works');	
+
+		})
+	}(); // FONDAMENTALE PER ESEGUIRE LA FUNZIONE INIT!!!!!
+//});
+	/*$("#load").click(function(){
+		var content = $('#content');
+		//setTimeout(function(){
+		$.ajax({
+			url:"file.txt",
+			cache: false,
+			//type: "GET",
+			//data: {name: "morano", age: 32},
+			success: function(response){
+				//if(response == "ok"){
+					//content.text(data);
+				console.log(response);
+				//}
+			},
+			error: function() {
+				console.log("error!");
+			}
+		});
+		//}, 2000);
+		
+	});*/
+
+
+</script>
+
+</body>
+</html>

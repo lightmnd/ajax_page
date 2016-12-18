@@ -1,0 +1,19 @@
+nav {
+	background: #f3f3f3;
+	padding: 10px;
+}
+
+nav ul {
+	padding: 0;
+}
+
+nav li {
+	display: inline-block;
+	padding: 5px;
+	border: 1px solid #000;
+}
+
+nav li a {
+	text-decoration: none;
+	text-transform: uppercase;
+}
